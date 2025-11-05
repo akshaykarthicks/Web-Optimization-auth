@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image List</title>
+</head>
+<body>
+    <h1>All Images</h1>
+    <a href="{% url 'upload_image' %}">Upload New Image</a>
+    
+    <div>
+        {% for image in images %}
+            <div>
+                <h3>{{ image.title }}</h3>
+                <img src="{{ image.image.url }}" alt="{{ image.title }}" style="max-width: 300px;">
+                <p>Uploaded: {{ image.uploaded_at }}</p>
+            </div>
+        {% empty %}
+            <p>No images uploaded yet.</p>
+        {% endfor %}
+    </div>
+    {%if user.is_authenticated%}
+    <button>
+    <a href="{% url 'logout' %}">Logout</a>
+        </button> 
+    {% endif %}
+    <button>
+        <a href="{% url 'login' %}">Login</a>
+            </button> 
+
+</body>
+</html>
